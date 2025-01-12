@@ -18,6 +18,9 @@ jobs:
      with:
        python-version: '3.11' # Вы можете указать нужную версию Python
        
+   - name: Установка зависимостей
+     run: |
+       pip install -r requirements.txt
    - name: Запуск тестов
      run: |
        python ORasa.py
