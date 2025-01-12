@@ -2,7 +2,7 @@ name: Workflow B
 
 on:
   workflow_run:
-    workflows: ["python_app"]
+    workflows: ["python_app.yml"]
     types:
       - completed
 
