@@ -1,27 +1,25 @@
-name: Workflow 2
+name: Workflow B
 
 on:
   workflow_run:
-    workflows: ["python_app.yml"]
+    workflows: ["python_app"]
     types:
       - completed
 
 jobs:
-  job2:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-         - name: Проверка исходного кода
-           uses: actions/checkout@v2
-           
-         - name: Установка Python
-           uses: actions/setup-python@v4
-           with:
-             python-version: '3.11' # Вы можете указать нужную версию Python   
-           
-         - name: Установка зависимостей
-           run: |
-             pip install -r requirements.txt
-             
-         - name: Запуск тестов
-           run: |
-             python ORasa.py
+    - name: Проверка исходного кода
+      uses: actions/checkout@v2
+      
+    - name: Установка Python
+      uses: actions/setup-python@v4
+      with:
+       python-version: '3.11'
+    - name: Deploy project
+      run: echo "Deploying project..."
+        pip install -r requirements.txt
+    - name: Запуск тестов
+      run: |
+        python ORasa.py
