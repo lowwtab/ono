@@ -12,14 +12,15 @@ jobs:
     steps:
     - name: Проверка исходного кода
       uses: actions/checkout@v2
-      
+     
     - name: Установка Python
       uses: actions/setup-python@v4
       with:
-       python-version: '3.11'
-    - name: Deploy project
-      run: echo "Deploying project..."
-        pip install -r requirements.txt
+       python-version: '3.11' # Вы можете указать нужную версию Python
+       
+    - name: Установка зависимостей
+      run: |
+       pip install -r requirements.txt
     - name: Запуск тестов
       run: |
-        python ORasa.py
+       python ORasa.py
