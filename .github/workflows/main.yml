@@ -5,6 +5,8 @@ on:
     workflows: ["python_app.yml"]
     types:
       - completed
+      - error
+      - failure
 
 jobs:
   deploy:
