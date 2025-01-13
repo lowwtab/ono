@@ -1,29 +1,32 @@
-name: Workflow B
-
-on:
-  workflow_run:
-    workflows: ["main2.yml"]
-    types:
-      - completed
-      - failure
-      - error
+name: Workflow 1
+on: [push]
 
 jobs:
- build:
-   runs-on: ubuntu-latest
-
-   steps:
-   - name: Проверка исходного кода
-     uses: actions/checkout@v2
+  trigger-workflow2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Workflow 2
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'workflow2.yml',
+              ref: 'main'
+            });
+          
+      - name: Проверка исходного кода
+        uses: actions/checkout@v2
      
-   - name: Установка Python
-     uses: actions/setup-python@v4
-     with:
-       python-version: '3.11' # Вы можете указать нужную версию Python
+      - name: Установка Python
+        uses: actions/setup-python@v4
+        with:
+         python-version: '3.11' # Вы можете указать нужную версию Python
        
-   - name: Установка зависимостей
-     run: |
-       pip install -r requirements.txt
-   - name: Запуск тестов
-     run: |
-       python ORasa.py
+      - name: Установка зависимостей
+        run: |
+         pip install -r requirements.txt
+      - name: Запуск тестов
+        run: |
+         python ORasa.py
