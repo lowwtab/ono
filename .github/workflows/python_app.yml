@@ -6,21 +6,33 @@ on:
    branches: [ main ]
 
 jobs:
- build:
-   runs-on: ubuntu-latest
+  trigger-main4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Workflow 2
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              python_app_id: 'main4.yml',
+              ref: 'main'
+            })
 
-   steps:
-   - name: Проверка исходного кода
-     uses: actions/checkout@v2
+      - name: Проверка исходного кода
+        uses: actions/checkout@v2
      
-   - name: Установка Python
-     uses: actions/setup-python@v4
-     with:
-       python-version: '3.11' # Вы можете указать нужную версию Python
+      - name: Установка Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' # Вы можете указать нужную версию Python
        
-   - name: Установка зависимостей
-     run: |
-       pip install -r requirements.txt
-   - name: Запуск тестов
-     run: |
-       python ORasa.py
+      - name: Установка зависимостей
+        run: |
+         pip install -r requirements.txt
+       
+      - name: Запуск тестов
+        run: |
+         python ORasa.py
+
