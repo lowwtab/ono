@@ -5,6 +5,7 @@ on:
     workflows: ["main2.yml"]
     types:
       - completed
+      - failure
       - error
 
 jobs:
