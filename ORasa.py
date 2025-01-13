@@ -16,3 +16,13 @@ def handle_message(message):
     response = get_info(message.text.lower())
     bot.reply_to(message, response)
 bot.polling(none_stop = True)
+
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "<h1 style='color:blue'>Hello World!</h1>"
+
+if __name__ == "main":
+    app.run(host="87.240.61.120")
