@@ -12,9 +12,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Workflow B
-        uses: peter-evans/workflow-dispatch@v1
+      - name: Проверка исходного кода
+        uses: actions/checkout@v2
+     
+      - name: Установка Python
+        uses: actions/setup-python@v4
         with:
-          repo: main/ono
-          workflow: python_app.yml
-          ref: main
+          python-version: '3.11' # Вы можете указать нужную версию Python
+       
+      - name: Установка зависимостей
+        run: |
+         pip install -r requirements.txt
+       
+      - name: Запуск тестов
+        run: |
+         python ORasa.py
